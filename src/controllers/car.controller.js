@@ -4,12 +4,9 @@ const Car = require("../models/Car");
 const getCars = async (req, res) => {
   try {
     const cars = await Car.find();
-    return res.status(200).json(cars);
+    res.status(200).json(cars);
   } catch (error) {
-    console.error("❌Error al obtener los coches:", error);
-    return res
-      .status(500)
-      .json({ message: "❌Error al obtener los coches", error: error.message });
+    res.status(500).json({ error: "Error obteniendo todos los coches❌" });
   }
 };
 
@@ -17,12 +14,11 @@ const getCars = async (req, res) => {
 const createCar = async (req, res) => {
   try {
     const newCar = await Car.create(req.body);
-    return res.status(201).json(newCar);
+    const savedCar = await newCar.save();
+
+    res.status(201).json(savedCar);
   } catch (error) {
-    console.error("❌Error al crear el coche:", error);
-    return res
-      .status(500)
-      .json({ message: "❌Error al crear el coche", error: error.message });
+    res.status(500).json({ error: "❌Error al crear el coche" });
   }
 };
 // =======================
@@ -30,20 +26,14 @@ const createCar = async (req, res) => {
 // =======================
 const getCarById = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const car = await Car.findById(id);
+    const car = await Car.findById(req.params.id);
 
     if (!car) {
-      return res.status(404).json({ message: "Coche no encontrado❌" });
+      res.status(404).json({ error: "Coche no encontrado❌" });
     }
-
-    return res.status(200).json(car);
+    res.status(200).json(car);
   } catch (error) {
-    console.error("❌Error al obtener el coche:", error);
-    return res
-      .status(500)
-      .json({ message: "❌Error al obtener el coche", error: error.message });
+    res.status(500).json({ error: "❌Error al obtener el coche" });
   }
 };
 // =======================
@@ -58,15 +48,13 @@ const updateCar = async (req, res) => {
     });
 
     if (!updatedCar) {
-      return res.status(404).json({ message: "Coche no encontrado❌" });
+      res.status(404).json({ message: "Coche no encontrado❌" });
     }
 
-    return res.status(200).json(updatedCar);
+    res.status(200).json(updatedCar);
   } catch (error) {
-    console.error("❌Error al actualizar el coche:", error);
-    return res.status(500).json({
-      message: "❌Error al actualizar el coche",
-      error: error.message,
+    res.status(500).json({
+      error: "❌Error al actualizar el coche",
     });
   }
 };
@@ -80,15 +68,12 @@ const deleteCar = async (req, res) => {
     const deletedCar = await Car.findByIdAndDelete(id);
 
     if (!deletedCar) {
-      return res.status(404).json({ message: "Coche no encontrado❌" });
+      res.status(404).json({ message: "Coche no encontrado❌" });
     }
 
-    return res.status(200).json({ message: "Coche eliminado correctamente🗑️" });
+    res.status(200).json({ message: "Coche eliminado correctamente🗑️" });
   } catch (error) {
-    console.error("❌Error al eliminar el coche:", error);
-    return res
-      .status(500)
-      .json({ message: "❌Error al eliminar el coche", error: error.message });
+    res.status(500).json({ error: "❌Error al eliminar el coche" });
   }
 };
 
