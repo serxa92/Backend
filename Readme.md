@@ -3,22 +3,19 @@
 RESTful API developed for the Backend module.  
 It includes full user management, JWT authentication, role-based permissions, CRUD operations for cars, image uploads with Cloudinary, and a database seeding system.
 
-## Technologies Used
+## Technologies Used 
 
 - Node.js
 - Express
 - MongoDB Atlas
 - Mongoose
-- Bcrypt
-- JSON Web Token (JWT)
 - Cloudinary
-- Multer
 - Nodemon
 
 ## Installation
 
 ```bash
-git clone <your-repository>
+git clone https://github.com/serxa92/Backend.git
 cd backend
 npm install
 npm run dev
@@ -36,9 +33,9 @@ Example body:
 
 {
   "brand": "volkswagen",
-  "model": "golf gti",
+  "model": "golf gti 35 edition",
   "year": 2011,
-  "mileage": 200000
+  "mileage": 150000
 }
 
 GET /cars/:id
@@ -55,8 +52,9 @@ Deletes a car.
 
 GET /cars/brand/:brand
 
-Returns cars filtered by brand (case-insensitive).
-Author
+Returns cars filtered by brand.
+```
+## Author
 
 Sergio Agulla
-```
+
