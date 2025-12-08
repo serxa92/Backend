@@ -2,11 +2,15 @@ const mongoose = require("mongoose");
 
 const carSchema = new mongoose.Schema(
   {
-    brand: { type: String, default: "Marca desconocida" },
+    brand: { 
+      type: String, 
+      default: "marca desconocida",
+      set: value => value.toLowerCase() 
+    },
     model: { type: String, default: "Modelo desconocido" },
     year: { type: Number, default: 2000 },
     mileage: { type: Number, default: 0 },
-    notes: { type: String, default: "" },
+    notes: { type: String, default: "" }
   },
   {
     timestamps: true,

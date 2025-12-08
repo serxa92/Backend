@@ -16,7 +16,12 @@ const createCar = async (req, res) => {
     const newCar = await Car.create(req.body);
     const savedCar = await newCar.save();
 
-    res.status(201).json(savedCar);
+    res.status(201).json({
+      data: savedCar,
+      info: `Coche creado el : ${new Date(
+        savedCar.createdAt
+      ).toLocaleDateString("Es-es")}`,
+    });
   } catch (error) {
     res.status(500).json({ error: "❌Error al crear el coche" });
   }
@@ -39,12 +44,11 @@ const getCarById = async (req, res) => {
 // =======================
 // PUT /cars/:id
 // =======================
-const updateCar = async (req, res) => {
+const updateCarById = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const updatedCar = await Car.findByIdAndUpdate(id, req.body, {
+    const updatedCar = await Car.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
+      runValidators: true,
     });
 
     if (!updatedCar) {
@@ -61,7 +65,7 @@ const updateCar = async (req, res) => {
 // =======================
 // DELETE /cars/:id
 // =======================
-const deleteCar = async (req, res) => {
+const deleteCarById = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -71,9 +75,28 @@ const deleteCar = async (req, res) => {
       res.status(404).json({ message: "Coche no encontrado❌" });
     }
 
-    res.status(200).json({ message: "Coche eliminado correctamente🗑️" });
+    res.status(200).json({ message: "Coche eliminado correctamente 🗑️" });
   } catch (error) {
     res.status(500).json({ error: "❌Error al eliminar el coche" });
+  }
+};
+
+// =======================
+// GET by brand /cars/brand/:brand
+// =======================
+
+const getCarByBrand = async (req, res) => {
+  try {
+    const brand = req.params.brand.toLowerCase();
+    const cars = await Car.find({ brand });
+    if (cars.length === 0) {
+      res
+        .status(404)
+        .json({ message: "No hay coches de esa marca en la base de datos❌" });
+    }
+    res.status(200).json(cars);
+  } catch (error) {
+    res.status(500).json({ error: "Error encontrando los coches" });
   }
 };
 
@@ -81,6 +104,7 @@ module.exports = {
   getCars,
   createCar,
   getCarById,
-  updateCar,
-  deleteCar,
+  updateCarById,
+  deleteCarById,
+  getCarByBrand,
 };
