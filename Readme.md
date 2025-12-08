@@ -12,7 +12,7 @@ It includes full user management, JWT authentication, role-based permissions, CR
 - Cloudinary
 - Nodemon
 
-## Installation
+## Installation and use
 
 ```bash
 git clone https://github.com/serxa92/Backend.git
