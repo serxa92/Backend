@@ -1,4 +1,4 @@
-# 🚗 Project 1 - Backend  
+# 🚗Garage Manager API
 ### Node.js · Express · MongoDB · Cloudinary
 
 RESTful API developed for the Backend module.  
@@ -8,14 +8,12 @@ It includes full user management, JWT authentication, role-based permissions, CR
 
 ## 🛠 Technologies Used
 
-<p align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" alt="Node.js"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" width="40" alt="Express"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="40" alt="MongoDB"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongoose/mongoose-original.svg" width="40" alt="Mongoose"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cloudinary/cloudinary-original.svg" width="40" alt="Cloudinary"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" width="40" alt="Nodemon"/>
-</p>
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
+![Nodemon](https://img.shields.io/badge/Nodemon-dev%20server-76D04B?style=for-the-badge)
 
 - **Node.js** – Backend runtime environment  
 - **Express** – REST API framework  
@@ -42,15 +40,11 @@ http://localhost:8080
 ## 📦 API Endpoints
 🚘 Car Endpoints
 ```bash
-GET /cars
+GET /cars => Returns all cars.
 ````
-
-Returns all cars.
-
-
-POST /cars
-
-Creates a new car (Authentication required).
+````bash
+POST /cars => Creates a new car (Authentication required).
+`````
 
 Example body:
 ```json
@@ -61,52 +55,41 @@ Example body:
   "mileage": 150000
 }
 ```
-GET /cars/:id
+````bash
+GET /cars/:id => Returns a car by its ID.
 
-Returns a car by its ID.
+PUT /cars/:id => Updates a car.
 
-PUT /cars/:id
+DELETE /cars/:id => Deletes a car.
 
-Updates a car.
-
-DELETE /cars/:id
-
-Deletes a car.
-
-GET /cars/brand/:brand
-
-Returns cars filtered by brand (case-insensitive).
+GET /cars/brand/:brand => Returns cars filtered by brand (case-insensitive).
+````
 
 ## 🔐 Authentication
-POST /auth/register
+- POST /auth/register
 
-Registers a new user (default role: user).
+- Registers a new user (default role: user).
 
-Supports image upload using multipart/form-data.
+- Supports image upload using multipart/form-data.
 
-POST /auth/login
+- POST /auth/login
 
-Returns JWT token.
+- Returns JWT token.
 
 ## 👥 Role-Based Permissions
 
-user → Can manage own data.
+- user → Can manage own data.
 
-admin → Can change user roles and delete any account.
+- admin → Can change user roles and delete any account.
 
-☁ Cloudinary Integration
+## ☁ Cloudinary Integration
 
-Image uploaded on user registration.
+- Image uploaded on user registration.
 
-Image URL stored in database.
+- Image URL stored in database.
 
-Image automatically deleted from Cloudinary when user is removed.
+- Image automatically deleted from Cloudinary when user is removed.
 
-🌱 Seeder
-
-To populate the database with sample cars:
-
-npm run seed:cars
-👨‍💻 Author
+## 👨‍💻 Author
 
 Sergio Agulla
