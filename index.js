@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const connectDB = require("./src/config/db");
 const carsRouter = require("./src/routes/car.routes");
+const authRoutes = require("./src/routes/auth");
 
 //1. Creamos instancia con Express
 const app = express();
@@ -15,10 +16,7 @@ connectDB();
 
 //4. Rutas
 app.use("/cars", carsRouter);
-
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "La API está funcionando" });
-});
+app.use("/auth", authRoutes);
 
 //5. Rutas de prueba
 app.get("/", (req, res) => {
