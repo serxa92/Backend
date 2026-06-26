@@ -4,9 +4,13 @@ const express = require("express");
 const connectDB = require("./src/config/db");
 const carsRouter = require("./src/routes/car.routes");
 const authRoutes = require("./src/routes/auth");
+const cors = require("cors");
 
 //1. Creamos instancia con Express
 const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 //2.Implementamos el middleware para parsear JSON en el body de las peticiones
 app.use(express.json());
